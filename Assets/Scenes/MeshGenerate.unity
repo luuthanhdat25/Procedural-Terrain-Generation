@@ -248,44 +248,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa6d67b43e934645995ebed8035d071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawMode: 1
-  xSize: 200
-  zSize: 200
-  yScale: 2000
-  noiseScale: 34.61
-  octaves: 4
-  persistance: 0.34
-  lacunarity: 5
-  seed: 0
-  offset: {x: 0, y: 0}
-  terrainTypes:
-  - name: DeepWater
-    height: 0.2
-    colour: {r: 0.07487221, g: 0, b: 0.6415094, a: 0}
-  - name: Water
-    height: 0.4
-    colour: {r: 0, g: 0.48435146, b: 0.8396226, a: 0}
-  - name: Water
-    height: 0.4
-    colour: {r: 0.07487221, g: 0, b: 0.6415094, a: 0}
-  - name: San
-    height: 0.5
-    colour: {r: 0.9290365, g: 0.9433962, b: 0.35154858, a: 0}
-  - name: Land
-    height: 0.6
-    colour: {r: 0.17895047, g: 0.8396226, b: 0, a: 0}
-  - name: Forrest
-    height: 0.65
-    colour: {r: 0.13586663, g: 0.6320754, b: 0, a: 0}
-  - name: Low Moutain
-    height: 0.75
-    colour: {r: 0.5849056, g: 0.23018913, b: 0, a: 0}
-  - name: Mountain
-    height: 0.88
-    colour: {r: 0.49056602, g: 0.19425097, b: 0, a: 0}
-  - name: Snow
-    height: 1
-    colour: {r: 1, g: 1, b: 1, a: 0}
+  terrainData:
+    drawMode: 0
+    xGripSize: 100
+    zGripSize: 100
+    yScale: 2000
+    noiseScale: 34
+    octaves: 4
+    persistance: 0.34
+    lacunarity: 2
+    seed: 0
+    offset: {x: 0, y: 0}
+    terrainTypes: []
   meshFilter: {fileID: 741222006}
   renderer: {fileID: 741222005}
 --- !u!23 &741222005
