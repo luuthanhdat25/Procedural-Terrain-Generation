@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MeshGen
 {
@@ -8,9 +9,11 @@ namespace MeshGen
         public TextureDrawMode drawMode;
         
         [Header("Settings Values")]
-        public int xGripSize;
-        public int zGripSize;
-        public int yScale;
+        [Range(0, 6)] 
+        public int levelOfDetail;
+        
+        public int yHeightMultiplier;
+        public AnimationCurve heightCurve;
         public float noiseScale;
         public int octaves;
         public float persistance;

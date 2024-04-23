@@ -1,7 +1,5 @@
-using System;
 using TextureGen;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace MeshGen
 {
@@ -17,7 +15,11 @@ namespace MeshGen
         [SerializeField] 
         private Renderer renderer;
         
-        private Mesh _mesh;
+        [SerializeField]
+        private bool autoUpdate;
+        public bool IsAutoUpdate() => this.autoUpdate;
+        
+        private new Mesh _mesh;
 
         protected override void LoadComponents()
         {
@@ -38,12 +40,24 @@ namespace MeshGen
             renderer = GetComponent<Renderer>();
         }
         
-         private void Start()
+         public void GenerateMap()
          {
              _mesh = new Mesh();
              meshFilter.mesh = _mesh;
-         
-             _mesh.GenerateTerrain(terrainData, ref renderer);
+
+             float[,] noiseMap = PerlinNoise.GenerateNoiseMap(
+                 MeshDisplay.MAP_CHUNK_SIZE + 1, MeshDisplay.MAP_CHUNK_SIZE + 1, terrainData.noiseScale,
+                 terrainData.seed,
+                 terrainData.octaves, terrainData.persistance, terrainData.lacunarity,
+                 terrainData.offset);
+             
+             _mesh.GenerateByNoiseMap(terrainData, noiseMap);
+             
+             if (terrainData.drawMode == TextureDrawMode.ColourMap) {
+                 renderer.DrawTexture(TerrainTextureGenerator.GetColorMapByTerrainTypeTexture(noiseMap, terrainData.terrainTypes));
+             }else {
+                 renderer.DrawTexture(TerrainTextureGenerator.GetHeightMapTexture(noiseMap));
+             }
          }
     }
 }
