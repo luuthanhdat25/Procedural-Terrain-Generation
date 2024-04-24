@@ -39,25 +39,25 @@ namespace MeshGen
             if (renderer != null) return;
             renderer = GetComponent<Renderer>();
         }
-        
-         public void GenerateMap()
-         {
-             _mesh = new Mesh();
-             meshFilter.mesh = _mesh;
 
-             float[,] noiseMap = PerlinNoise.GenerateNoiseMap(
-                 MeshDisplay.MAP_CHUNK_SIZE + 1, MeshDisplay.MAP_CHUNK_SIZE + 1, terrainData.noiseScale,
-                 terrainData.seed,
-                 terrainData.octaves, terrainData.persistance, terrainData.lacunarity,
-                 terrainData.offset);
+        public void GenerateMap()
+        {
+            _mesh = new Mesh();
+            meshFilter.mesh = _mesh;
+
+            float[,] noiseMap = PerlinNoise.GenerateNoiseMap(
+                MeshDisplay.MAP_CHUNK_SIZE + 1, MeshDisplay.MAP_CHUNK_SIZE + 1, terrainData.noiseScale,
+                terrainData.seed,
+                terrainData.octaves, terrainData.persistance, terrainData.lacunarity,
+                terrainData.offset);
              
-             _mesh.GenerateByNoiseMap(terrainData, noiseMap);
+            _mesh.GenerateByNoiseMap(terrainData, noiseMap);
              
-             if (terrainData.drawMode == TextureDrawMode.ColourMap) {
-                 renderer.DrawTexture(TerrainTextureGenerator.GetColorMapByTerrainTypeTexture(noiseMap, terrainData.terrainTypes));
-             }else {
-                 renderer.DrawTexture(TerrainTextureGenerator.GetHeightMapTexture(noiseMap));
-             }
-         }
+            if (terrainData.drawMode == TextureDrawMode.ColourMap) {
+                renderer.DrawTexture(TerrainTextureGenerator.GetColorMapByTerrainTypeTexture(noiseMap, terrainData.terrainTypes));
+            }else {
+                renderer.DrawTexture(TerrainTextureGenerator.GetHeightMapTexture(noiseMap));
+            }
+        }
     }
 }
